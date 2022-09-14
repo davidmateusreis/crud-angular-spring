@@ -21,7 +21,7 @@ export class CoursesService {
       );
   }
 
-  save(record: Course) {
+  save(record: Partial<Course>) { // aceita objetos desde que tenham pelo menos um atributo
     return this.httpClient.post<Course>(this.API, record).pipe(first());
   }
 }
