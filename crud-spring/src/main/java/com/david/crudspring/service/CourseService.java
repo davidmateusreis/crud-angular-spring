@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.david.crudspring.dto.CourseDto;
 import com.david.crudspring.dto.mapper.CourseMapper;
+import com.david.crudspring.enums.Category;
 import com.david.crudspring.exception.RecordNotFountException;
 import com.david.crudspring.repository.CourseRepository;
 
@@ -49,7 +50,7 @@ public class CourseService {
         return courseRepository.findById(id)
                 .map(recordFound -> {
                     recordFound.setName(courseDto.getName());
-                    recordFound.setCategory(courseDto.getCategory());
+                    recordFound.setCategory(Category.FRONTEND);
                     return courseRepository.save(recordFound);
                 }).map(courseMapper::toDTO).orElseThrow(() -> new RecordNotFountException(id));
     }

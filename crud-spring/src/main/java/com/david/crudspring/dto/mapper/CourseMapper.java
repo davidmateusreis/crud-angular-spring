@@ -3,6 +3,7 @@ package com.david.crudspring.dto.mapper;
 import org.springframework.stereotype.Component;
 
 import com.david.crudspring.dto.CourseDto;
+import com.david.crudspring.enums.Category;
 import com.david.crudspring.model.Course;
 
 @Component
@@ -13,7 +14,7 @@ public class CourseMapper {
         if (course == null) {
             return null;
         }
-        return new CourseDto(course.getId(), course.getName(), course.getCategory());
+        return new CourseDto(course.getId(), course.getName(), "Frontend");
     }
 
     public Course toEntity(CourseDto courseDto) {
@@ -27,7 +28,7 @@ public class CourseMapper {
             course.setId(courseDto.getId());
         }
         course.setName(courseDto.getName());
-        course.setCategory(courseDto.getCategory());
+        course.setCategory(Category.FRONTEND);
         course.setStatus("Active");
         return course;
     }
