@@ -8,14 +8,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.Length;
 
 import com.david.crudspring.enums.Category;
+import com.david.crudspring.enums.Status;
 import com.david.crudspring.enums.converters.CategoryConverter;
+import com.david.crudspring.enums.converters.StatusConverter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
@@ -43,8 +44,7 @@ public class Course {
     private Category category;
 
     @NotNull
-    @Length(max = 10)
-    @Pattern(regexp = "Active|Inactive")
     @Column(length = 10, nullable = false)
-    private String status = "Active";
+    @Convert(converter = StatusConverter.class)
+    private Status status = Status.ACTIVE;
 }

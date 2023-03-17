@@ -1,11 +1,11 @@
 package com.david.crudspring.enums;
 
-public enum Category {
-    BACKEND("Backend"), FRONTEND("Frontend");
+public enum Status {
+    ACTIVE("Active"), INACTIVE("Inactive");
 
     private String value;
 
-    private Category(String value) {
+    private Status(String value) {
         this.value = value;
     }
 
