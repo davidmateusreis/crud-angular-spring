@@ -1,10 +1,13 @@
 package com.david.crudspring.dto.mapper;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.springframework.stereotype.Component;
 
 import com.david.crudspring.dto.CourseDto;
+import com.david.crudspring.dto.LessonDto;
 import com.david.crudspring.enums.Category;
 import com.david.crudspring.model.Course;
 
@@ -16,7 +19,10 @@ public class CourseMapper {
         if (course == null) {
             return null;
         }
-        return new CourseDto(course.getId(), course.getName(), course.getCategory().getValue(), course.getLessons());
+        List<LessonDto> lessons = course.getLessons().stream()
+                .map(lesson -> new LessonDto(lesson.getId(), lesson.getName(), lesson.getYoutubeUrl()))
+                .collect(Collectors.toList());
+        return new CourseDto(course.getId(), course.getName(), course.getCategory().getValue(), lessons);
     }
 
     public Course toEntity(CourseDto courseDto) {
