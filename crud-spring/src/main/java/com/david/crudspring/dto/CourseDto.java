@@ -37,9 +37,6 @@ public class CourseDto {
     @Pattern(regexp = "Backend|Frontend")
     private String category;
 
-    @NotBlank
-    @NotNull
-    @Length(min = 5, max = 100)
     private List<LessonDto> lessons = new ArrayList<>();
 
 }
