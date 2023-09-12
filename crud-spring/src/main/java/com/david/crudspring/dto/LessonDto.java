@@ -1,9 +1,23 @@
 package com.david.crudspring.dto;
 
-import lombok.Data;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-@Data
+import org.hibernate.validator.constraints.Length;
+
 public class LessonDto {
+
+    private Long id;
+
+    @NotBlank
+    @NotNull
+    @Length(min = 5, max = 100)
+    private String name;
+
+    @NotBlank
+    @NotNull
+    @Length(min = 10, max = 11)
+    private String youtubeUrl;
 
     public LessonDto(Long id, String name, String youtubeUrl) {
         this.id = id;
@@ -11,8 +25,27 @@ public class LessonDto {
         this.youtubeUrl = youtubeUrl;
     }
 
-    private Long id;
-    private String name;
-    private String youtubeUrl;
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getYoutubeUrl() {
+        return youtubeUrl;
+    }
+
+    public void setYoutubeUrl(String youtubeUrl) {
+        this.youtubeUrl = youtubeUrl;
+    }
 }

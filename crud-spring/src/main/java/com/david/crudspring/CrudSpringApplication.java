@@ -29,13 +29,13 @@ public class CrudSpringApplication {
 
 			Lesson lesson = new Lesson();
 			lesson.setName("Introduction");
-			lesson.setYoutubeUrl("watch?v=1");
+			lesson.setYoutubeUrl("12345678910");
 			lesson.setCourse(c);
 			c.getLessons().add(lesson);
 
 			Lesson lesson1 = new Lesson();
 			lesson1.setName("Angular");
-			lesson1.setYoutubeUrl("watch?v=2");
+			lesson1.setYoutubeUrl("12345678910");
 			lesson1.setCourse(c);
 			c.getLessons().add(lesson1);
 
