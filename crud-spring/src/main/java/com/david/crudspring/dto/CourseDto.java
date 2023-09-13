@@ -5,10 +5,11 @@ import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.david.crudspring.enums.Category;
+import com.david.crudspring.enums.validation.ValueOfEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CourseDto {
@@ -23,7 +24,7 @@ public class CourseDto {
 
     @NotNull
     @Length(max = 10)
-    @Pattern(regexp = "Backend|Frontend")
+    @ValueOfEnum(enumClass = Category.class)
     private String category;
 
     private List<LessonDto> lessons = new ArrayList<>();
