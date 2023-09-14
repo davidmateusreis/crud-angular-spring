@@ -4,13 +4,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.david.crudspring.dto.CourseDto;
+import com.david.crudspring.dto.CoursePageDto;
 import com.david.crudspring.dto.mapper.CourseMapper;
 import com.david.crudspring.exception.RecordNotFountException;
 import com.david.crudspring.model.Course;
@@ -29,11 +34,10 @@ public class CourseService {
         this.courseMapper = courseMapper;
     }
 
-    public List<CourseDto> list() {
-        return courseRepository.findAll()
-                .stream()
-                .map(courseMapper::toDTO)
-                .collect(Collectors.toList());
+    public CoursePageDto list(@PositiveOrZero int pageNumber, @Positive @Max(100) int pageSize) {
+        Page<Course> page = courseRepository.findAll(PageRequest.of(pageNumber, pageSize));
+        List<CourseDto> courses = page.get().map(courseMapper::toDTO).collect(Collectors.toList());
+        return new CoursePageDto(courses, page.getTotalElements(), page.getTotalPages());
     }
 
     public CourseDto findById(@NotNull @Positive Long id) {
